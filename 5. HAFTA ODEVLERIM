@@ -1,0 +1,253 @@
+#####################################################3
+
+
+#5. HAFTA 1. ODEV HESAP OLUSTURMA#
+
+
+print("Hoşgeldiniz.Lutfen Kullanici Adi ve Parolanizi Olusturun")
+
+
+while True:
+    kullanici_adi = input("Kullanıcı adı: ")
+    parola  = input("Parola: ")
+    if kullanici_adi == "q" or parola == "q":
+        break
+    try:
+        dosya = open("hesaplar.txt", "a+")
+        dosya.seek(0)
+        eskiler = dosya.readlines()
+        eskiden_alinmis_mi = False
+        for kullanici in eskiler:
+            if kullanici_adi in kullanici:
+                print("Bu kullanici adi alınmıştır. Başka bir ad seçin.")
+                eskiden_alinmis_mi = True
+                break
+        if eskiden_alinmis_mi == False:
+            dosya.write(kullanici_adi + " : " + parola + "\n")
+            print("Bilgileriniz başarılı olarak kaydedildi.")
+            dosya.close()
+    except:
+        print("Bir hata oluştu.")
+
+#####################################################
+
+#5. HAFTA 2. ODEV SAYI TAHMIN OYUNU#
+
+print("sayı tahmin oyununa hoş geldiniz...")
+sayı=75
+sefer=0
+try:
+    while sefer<=100:
+        tahmin=int(input("lütfen 0 ile 100 arasında bir sayı tahmin ediniz:"))
+        sefer+=1
+        fark=sayı-tahmin
+        tfark=tahmin-sayı
+        if sayı!=tahmin:
+            if fark>0:
+                if 0<fark<10:
+                    print("çok yaklaştın biraz daha çıkmalısın")
+                    continue
+                elif 10<fark<30:
+                    print("daha yüksek bir sayı girmelisin")
+                    continue
+                elif 30<fark<70:
+                    print("çok daha yüksek bir sayı girmelisin")
+                    continue
+                else:
+                    print("arada dağlar kadar fark var epey çıkmalısın")
+                    continue
+            if tfark>0:
+                if 0<tfark<10:
+                    print("çok yaklaştın biraz daha inmelisin")
+                    continue
+                elif 10<tfark<30:
+                    print("daha düşük bir sayı girmelisin")
+                    continue
+                elif 30<tfark<70:
+                    print("çok daha düşük bir sayı girmelisin")
+                    continue
+                else:
+                    print("arada dağlar kadar fark var çok inmrlisin")
+                    continue
+        if sayı==tahmin:
+            print("tebrikler sayıyı {}. denemede bildiniz".format(sefer))
+            break
+except:
+    print("hatalı giriş yaptınız")
+
+#########################################################
+
+#5. HAFTA 3. ODEV LISTE AYIKLAMA#
+
+
+galatasaray=[]
+fenerbahce=[]
+besiktas=[]
+
+futbolcular = open(r"C:\Users\Desktop\futbolcular.txt", "r")
+#masaustundeki dosyamiz okunabilir modda
+
+satir_sayisi = 0
+with futbolcular as f:
+    for line in f:
+        satir_sayisi += 1
+#dosyamizdaki satir sayisini bulduk (while dongusunde kullanacagiz)
+
+futbolcular = open(r"C:\Users\Desktop\futbolcular.txt", "r")
+#dosyamizi tekrar okunur modda actik
+
+a=1
+while a<satir_sayisi:
+    satir = futbolcular.readline()
+    a+=1
+    if 'Galatasaray' in satir:
+        galatasaray.append(satir)
+    elif 'Fenerbahçe' in satir:
+        fenerbahce.append(satir)
+    elif 'Beşiktaş' in satir:
+        besiktas.append(satir)
+futbolcular.close()
+#while dongusu ile futbolcular.txt dosyamizda satir satir gezerek, futbolculari olusturdugumuz listelere atadik.
+
+galatasaray_txt = open(r"C:\Users\OSMAN\Desktop\galatasaray.txt", "w")
+fenerbahce_txt = open(r"C:\Users\OSMAN\Desktop\fenerbahce.txt", "w")
+besiktas_txt = open(r"C:\Users\OSMAN\Desktop\besiktas.txt", "w")
+#ayirdigimiz futbolculari atayacagimiz(yazdiracagimiz) dosyalari masaustunde olusturduk
+
+a=1
+while a<len(galatasaray):
+    for i in galatasaray:
+        galatasaray_txt.write("{}. {} \n".format(a,i))  # dosyaya yazdik
+        a += 1
+galatasaray_txt.close()
+#galatasaray listesindeki futbolculari while dongusu ile dosyaya aktardik
+
+a=1
+while a<len(fenerbahce):
+    for i in fenerbahce:
+        fenerbahce_txt.write("{}. {} \n".format(a,i))  # dosyaya yazdik
+        a += 1
+fenerbahce_txt.close()
+#fenerbahce listesindeki futbolculari while dongusu ile dosyaya aktardik
+
+a=1
+while a<len(besiktas):
+    for i in besiktas:
+        besiktas_txt.write("{}. {} \n".format(a,i))  # dosyaya yazdik
+        a += 1
+besiktas_txt.close()
+#besiktas listesindeki futbolculari while dongusu ile dosyaya aktardik
+
+print(fenerbahce)
+print(galatasaray)
+print(besiktas)
+
+############################################
+
+#5. HAFTA 4. ODEV HACIM HESAPLAMA#
+
+while True:
+    try:
+        while True:
+            pi = 3.14
+
+            print("""
+                Islemler:
+                A.Alan Hesaplama  
+                B.Hacim Hesaplama 
+                """)
+
+            islem = input("Lutfen Yapmak Istediginiz Islemi Secin:")
+
+            if islem == "A" or "a":
+                print("""
+                    Alan Hesaplama Islemleri:
+                    1.Kare Alani
+                    2.Dikdortgen Alani
+                    3.Ucgen Alani
+                    """)
+
+                islem = input("Lutfen Alanini Hesaplamak Istediginiz Sekli Secin:")
+
+                if islem == "1":
+                    kenar_uzunlugu = int(input("Kenar Uzunlugunu Girin: "))
+                    kare_alan = kenar_uzunlugu ** 2
+                    print("Karenin Alani:", kare_alan)
+                elif islem == "2":
+                    kisa_kenar = int(input("Kisa Kenar Uzunlugunu Girin: "))
+                    uzun_kenar = int(input("Uzun Kenar Uzunlugunu Girin: "))
+                    dikdirtgen_alan = kisa_kenar * uzun_kenar
+                    print("Dikdortgenin Alani:", dikdirtgen_alan)
+                elif islem == "3":
+                    yukseklik = int(input("Ucgenin Yuksekligini Girin: "))
+                    taban = int(input("Yuksekligin Ait Oldugu Taban Uzunlugunu Girin: "))
+                    ucgen_alan = (yukseklik * taban) / 2
+                    print("Ucgenin Alani:", ucgen_alan)
+                else:
+                    print("Lutfen Gecerli Bir Islem Girin!")
+                    continue
+            elif islem == "B" or "b":
+                print("""
+                    Hacim Hesaplama Islemleri:
+
+                    1.Kup Hacmi
+                    2.Kure Hacmi
+                    3.Koni Hacmi
+
+                    """)
+
+                islem = input("Lutfen Hacmini Hesaplamak Istediginiz Sekli Secin:")
+
+                if islem == "1":
+                    kenar_uzunlugu = int(input("Kupun Kenar Uzunlugunu Girin: "))
+                    kup_hacim = kenar_uzunlugu ** 3
+                    print("Kupun Hacmi:", kup_hacim)
+                elif islem == "2":
+                    yari_cap = int(input("Kurenin Yaricapini Girin: "))
+                    kure_hacim = (4 / 3) * (pi * (yari_cap ** 3))
+                    print("Kurenin Hacmi:", kure_hacim)
+                elif islem == "3":
+                    yukseklik = int(input("Koninin Yuksekligini Girin: "))
+                    yari_cap = int(input("Koniye Ait Tabaninin Yaricapini Girin: "))
+                    koni_hacim = (1 / 3) * (pi * (yari_cap ** 2)) * yukseklik
+                    print("Koninin Hacmi:", koni_hacim)
+                else:
+                    print("Lutfen Gecerli Bir Islem Girin!")
+                    continue
+            else:
+                print("Lutfen Gecerli Bir Islem Girin!")
+                continue
+    except:
+        print("Hatali Islem!")
+        continue
+
+#############################################
+
+#5. HAFTA 5.  ODEV FIZZ, BUZZ ve FIZZBUZZ#
+
+for i in range(1,100):
+    if i%3==0 and i%5==0:
+        print("FIZZBUZZ")
+    elif i%3==0:
+        print("FIZZ")
+    elif i%5==0:
+        print("BUZZ")
+
+    else:
+        print(i)
+
+################################################
+
+#5. HAFTA 6. ODEV KULLANICIDAN ALINAN SAYI ASAL SAYI MI DEGIL MI#
+
+değer=0
+sayi=input("Sayiniz:")
+for i in range(2,int(sayi)):
+      if(int(sayi)%i==0):
+            değer+=1
+            break
+if(değer!=0):
+      print(sayi,"Sayiniz Asal Değildir.")
+else:
+      print(sayi,"Sayiniz Asal Sayidir.")
+
